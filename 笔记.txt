@@ -1,0 +1,128 @@
+复习
+canvas
+	var ctx = canvas.getContext('2d');
+
+	ctx
+		.moveTo
+		.lineTo
+
+		.fillRect
+		.strokeRect
+		.rect
+		.clearRect
+			(x,y,w,h)
+
+		.strokeText
+		.fillText
+			(文字,x,y)
+
+		.textAlign
+			center | left | right
+		.textBaseline
+			middle | top | bottom | alphabetic
+		.font
+			"字号(有px) 字体"
+
+		.stroke
+		.fill
+
+		.save
+		.restore
+
+		.translate
+			(x位移,y位移) 不能省略
+		.rotate
+			(弧度值) 旋转中心:画布左上角
+		.scale
+			(x轴方向缩放比例,y轴方向缩放比例)
+			不能省略
+
+		.arc
+			(Ox,Oy,r,startDegree(弧度),endDegree(弧度),countclockwise)
+		
+		.beginPath
+			开启一段路径
+		.closePath
+
+		.lineJoin
+			miter | round | bevel
+		.lineCap
+			round | square | butt
+
+		.fillStyle
+		.strokeStyle
+
+		.drawImage(image,sx,sy,sw,sh,dx,dy,dw,dh);
+
+		.shadowOffsetX
+		.shadowOffsetY
+		.shadowBlur
+		.shadowColor
+
+------
+drawImage
+------
+做游戏
+
+怎么玩 -> 产品经理
+长啥样 -> 设计师
+流不流畅 -> 工程师
+
+俄罗斯方块
+纪念碑谷
+开心消消乐
+天天酷跑
+神庙逃亡
+愤怒的小鸟
+植物大战僵尸
+飞机大战
+------
+class Worker{
+	constructor(){
+		....
+
+		this.alertName();
+	}
+
+	alertName(){
+		...
+	}
+}
+------
+
+鱼
+	x
+	y
+	speed
+	rotate
+	kind
+
+	draw
+------
+炮
+	x,
+	y,
+	rotate,
+	kind,
+------
+炮弹
+	x
+	y
+	speed
+	rotate
+	kind
+	
+------
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			background-color: black;
+			margin: 0;
+		}
+
+		canvas{
+			background-image: url(statics/FishingMaster/img/game_bg_2_hd.jpg);
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="800" height="600"></canvas>
+	<script src="js/common.js"></script>
+	<script src="js/resource.js"></script>
+	<script src="js/fish.js"></script>
+	<script src="js/cannon.js"></script>
+	<script src="js/bullet.js"></script>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+		var images = {};
+		var distance = 70;
+
+		var fishArray = [];
+		var chance = 0.8;
+
+
+		loadResource(resource,function(){
+			
+			var cannon = new Cannon(1);
+
+			setInterval(function(){
+				clear();
+
+				// 出鱼
+				if( random() < chance ){
+
+					var fromLeft = random() > 0.5;
+					var fish = new Fish(rnd(1,6));
+						fish.y = rnd(100,500);
+
+					if( fromLeft ){
+						fish.x = - distance;
+						fish.rotate = rnd(-45,45)
+					} else {
+						fish.x = canvas.width + distance;
+						fish.rotate = rnd(135,225);
+					}
+
+					fishArray.push(fish);
+				}
+
+				// 画鱼
+				fishArray.forEach(function(fish,index){
+					fish.draw();
+
+					// 判断鱼是否出界
+					if(
+						fish.x < -distance || 
+						fish.x > canvas.width + distance || 
+						fish.y < -distance || 
+						fish.y > canvas.height + distance
+					){
+						fishArray.splice(index,1)
+					}
+				})
+
+				// 画炮台
+				ctx.drawImage(images.bottom,
+					0,0,765,70,
+					0,532,765,70
+				)
+
+				// 画子弹
+				bulletArray.forEach(function(bullet,index){
+					bullet.draw();
+
+					// 子弹出界
+					if(
+						bullet.x < -distance || 
+						bullet.x > canvas.width + distance || 
+						bullet.y < -distance || 
+						bullet.y > canvas.height + distance
+					){
+						bulletArray.splice(index,1)
+					}
+				})
+
+				// 画炮
+				cannon.draw();
+			},16)
+
+			canvas.onclick = function(ev){
+				var {
+					pageX,
+					pageY
+				} = ev;
+
+				cannon.rotate = -a2d(atan2(cannon.x - pageX,cannon.y - pageY))
+
+				cannon.emit();
+
+				var bullet = new Bullet(cannon.kind);
+					bullet.rotate = cannon.rotate;
+
+				bulletArray.push(bullet);
+			}
+		})
+
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
